@@ -1,7 +1,7 @@
 module V1
   class TasksSerializer < ActiveModel::Serializer
     
-    attributes :title, :created_at, :abstract, :id
+    attributes :title, :created_at, :status, :due_date, :abstract, :id
     has_one :user, serializer: V1::UserSerializer
 
     def abstract

@@ -6,5 +6,5 @@ end
   User.create(email: 'joey.byrne@outlook.com', username: 'JoeyBoey', password: 'MOJO1991')
 
 10.times do
-  Task.create(title: Faker::Name.title, body: Faker::Lorem.paragraph(30 + rand(70)), user: User.all.sample)
+  Task.create(title: Faker::Name.title, body: Faker::Lorem.sentence(10),status: 'incomplete', due_date: Faker::Date.between(60.days.from_now, Date.today), user: User.all.sample)
 end

@@ -3,9 +3,9 @@ module V1
     skip_before_action :authenticate_user_from_token!, only: [:index, :show]
     
     # GET /v1/stories
-    # Get all the stories
+    # Get all the tasks
     def index
-      @tasks = Task.includes(:user).order(created_at: :desc).all
+      @tasks = Task.includes(:user).order(due_date: :asc).all
       render json: @tasks, each_serializer: TasksSerializer
     end
 
@@ -15,7 +15,7 @@ module V1
     end
 
     # POST /v1/stories
-    # Add a new story
+    # Add a new task
     def create
       @task = Task.new(task_params)
 
@@ -29,7 +29,7 @@ module V1
     private
 
     def task_params
-      params.require(:task).permit(:title, :body).merge(user: current_user)
+      params.require(:task).permit(:title, :body, :status, :due_date).merge(user: current_user)
     end
 
   end
